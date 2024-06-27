@@ -10,15 +10,26 @@ class Node:
 
 class Solution:
     def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
-        ancestor = set()
-        while p:
-            ancestor.add(p)
-            p = p.parent
+        # Pointers to traverse the tree
+        a, b = p, q
         
-        while q:
-            if q in ancestor:
-                return q
-            q = q.parent
+        # Loop until both pointers meet
+        while a != b:
+            # Move to the parent node, or to the other node's initial position if reaching the root
+            a = a.parent if a else q
+            b = b.parent if b else p
+        
+        # Return the common ancestor
+        return a
+        # ancestor = set()
+        # while p:
+        #     ancestor.add(p)
+        #     p = p.parent
+        
+        # while q:
+        #     if q in ancestor:
+        #         return q
+        #     q = q.parent
         
 
 
