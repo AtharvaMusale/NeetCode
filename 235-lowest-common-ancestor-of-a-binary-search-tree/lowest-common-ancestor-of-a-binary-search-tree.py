@@ -7,23 +7,23 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-        def dfs(node):
-            if node:
-                if p.val < node.val and q.val < node.val:
-                    return dfs(node.left)
-                elif p.val > node.val and q.val > node.val:
-                    return dfs(node.right)
-                else:
-                    return node
-            return None
-        return dfs(root)
+        # def dfs(node):
+        #     if node:
+        #         if p.val < node.val and q.val < node.val:
+        #             return dfs(node.left)
+        #         elif p.val > node.val and q.val > node.val:
+        #             return dfs(node.right)
+        #         else:
+        #             return node
+        #     return None
+        # return dfs(root)
 
-        # curr = root
-        # while True:
-        #     if p.val> curr.val and q.val>curr.val:
-        #         curr = curr.right
-        #     elif p.val<curr.val and q.val<curr.val:
-        #         curr = curr.left
-        #     else:
-        #         return curr
+        curr = root
+        while True:
+            if p.val> curr.val and q.val>curr.val:
+                curr = curr.right
+            elif p.val<curr.val and q.val<curr.val:
+                curr = curr.left
+            else:
+                return curr
         
