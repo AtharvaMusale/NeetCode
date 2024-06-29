@@ -1,22 +1,55 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        col = collections.defaultdict(set)
-        row = collections.defaultdict(set)
-        squares = collections.defaultdict(set)
+        N = 9
 
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == ".":
+        # Use hash set to record the status
+        rows = [set() for _ in range(N)]
+        cols = [set() for _ in range(N)]
+        boxes = [set() for _ in range(N)]
+
+        for r in range(N):
+            for c in range(N):
+                val = board[r][c]
+                # Check if the position is filled with number
+                if val == ".":
                     continue
-                
-                if board[r][c] in row[r] or board[r][c] in col[c] or board[r][c] in squares[r//3,c//3]:
+
+                # Check the row
+                if val in rows[r]:
                     return False
-                
-                row[r].add(board[r][c])
-                col[c].add(board[r][c])
-                squares[(r//3,c//3)].add(board[r][c])
-            
+                rows[r].add(val)
+
+                # Check the column
+                if val in cols[c]:
+                    return False
+                cols[c].add(val)
+
+                # Check the box
+                idx = (r // 3) * 3 + c // 3
+                if val in boxes[idx]:
+                    return False
+                boxes[idx].add(val)
+
         return True
+# class Solution:
+#     def isValidSudoku(self, board: List[List[str]]) -> bool:
+#         col = collections.defaultdict(set)
+#         row = collections.defaultdict(set)
+#         squares = collections.defaultdict(set)
+
+#         for r in range(9):
+#             for c in range(9):
+#                 if board[r][c] == ".":
+#                     continue
+                
+#                 if board[r][c] in row[r] or board[r][c] in col[c] or board[r][c] in squares[r//3,c//3]:
+#                     return False
+                
+#                 row[r].add(board[r][c])
+#                 col[c].add(board[r][c])
+#                 squares[(r//3,c//3)].add(board[r][c])
+            
+#         return True
 
                 
 
