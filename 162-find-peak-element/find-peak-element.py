@@ -1,7 +1,7 @@
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
         
-        def binary_search(nums):
+
             low = 0
             high = len(nums)-1
             
@@ -15,4 +15,4 @@ class Solution:
             
             return low
         
-        return binary_search(nums)
+    
