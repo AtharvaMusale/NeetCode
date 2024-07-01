@@ -12,10 +12,19 @@ class Solution:
         target = self.sum * random.random()
         return self.search(target)
     
-    def search(self,target):
-        for i,j in enumerate(self.prefix_sum):
-            if target<j:
-                return i
+
+    def search(self, num):
+        low, high, ans = 0, len(self.prefix_sum) - 1, None
+
+        while low <= high:
+            mid = low + (high - low) // 2
+            if num < self.prefix_sum[mid]:
+                ans = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        return ans
 
 # class Solution:
 #     def __init__(self, w):
