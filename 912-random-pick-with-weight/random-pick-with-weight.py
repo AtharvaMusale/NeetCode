@@ -1,31 +1,48 @@
 import random
-
 class Solution:
-    def __init__(self, w):
-        self.prefix_sum = []
+    def __init__(self,w):
         self.w = w
+        self.prefix_sum = []
         self.sum = 0
-        for wt in w:
-            self.sum += wt
+        for i in w:
+            self.sum += i
             self.prefix_sum.append(self.sum)
-
+    
     def pickIndex(self):
         target = self.sum * random.random()
-        print(target)
         return self.search(target)
+    
+    def search(self,target):
+        for i,j in enumerate(self.prefix_sum):
+            if target<j:
+                return i
 
-    def search(self, num):
-        low, high, ans = 0, len(self.prefix_sum) - 1, None
+# class Solution:
+#     def __init__(self, w):
+#         self.prefix_sum = []
+#         self.w = w
+#         self.sum = 0
+#         for wt in w:
+#             self.sum += wt
+#             self.prefix_sum.append(self.sum)
 
-        while low <= high:
-            mid = low + (high - low) // 2
-            if num < self.prefix_sum[mid]:
-                ans = mid
-                high = mid - 1
-            else:
-                low = mid + 1
+#     def pickIndex(self):
+#         target = self.sum * random.random()
+#         print(target)
+#         return self.search(target)
 
-        return ans
+#     def search(self, num):
+#         low, high, ans = 0, len(self.prefix_sum) - 1, None
+
+#         while low <= high:
+#             mid = low + (high - low) // 2
+#             if num < self.prefix_sum[mid]:
+#                 ans = mid
+#                 high = mid - 1
+#             else:
+#                 low = mid + 1
+
+#         return ans
 
 # Example usage:
 # w = [3, 17, 18, 25]
