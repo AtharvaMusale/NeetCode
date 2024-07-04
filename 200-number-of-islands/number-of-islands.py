@@ -2,25 +2,46 @@ class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         vis = set()
         island = 0
-
         def dfs(i,j):
-            for (x,y) in [(1,0),(0,1),(-1,0),(0,-1)]:
-                xi , yi = i + x, j + y
-                if (0<=xi<len(grid)) and (0<=yi<len(grid[0])) and (grid[xi][yi] == "1") and (xi,yi) not in vis:
-                
+            for (x,y) in [(1,0),(-1,0),(0,1),(0,-1)]:
+                xi, yi = i+x , y+j
+
+                if (0<= xi < len(grid)) and (0<= yi < len(grid[0])) and grid[xi][yi] == "1" and (xi,yi) not in vis:
                     vis.add((xi,yi))
                     dfs(xi,yi)
+                        
 
-            
-        
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == "1" and (i,j) not in vis:
                     island+=1
                     vis.add((i,j))
                     dfs(i,j)
-        
+
         return island
+
+
+        # vis = set()
+        # island = 0
+
+        # def dfs(i,j):
+        #     for (x,y) in [(1,0),(0,1),(-1,0),(0,-1)]:
+        #         xi , yi = i + x, j + y
+        #         if (0<=xi<len(grid)) and (0<=yi<len(grid[0])) and (grid[xi][yi] == "1") and (xi,yi) not in vis:
+                
+        #             vis.add((xi,yi))
+        #             dfs(xi,yi)
+
+            
+        
+        # for i in range(len(grid)):
+        #     for j in range(len(grid[0])):
+        #         if grid[i][j] == "1" and (i,j) not in vis:
+        #             island+=1
+        #             vis.add((i,j))
+        #             dfs(i,j)
+        
+        # return island
 
 
 # class Solution:
