@@ -1,7 +1,7 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
             dp = {len(s): 1 }
-            res = 0
+            
             def dfs(i):
                 if i in dp:
                     return dp[i]
