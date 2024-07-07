@@ -7,7 +7,7 @@ class Solution:
             area = max(area, (r-l) * (min(arr[l], arr[r])))
             if arr[l] < arr[r]:
                 l+=1
-            elif arr[l]>=arr[r]:
+            else:# arr[l]>=arr[r]:
                 r-=1
         
         return area
