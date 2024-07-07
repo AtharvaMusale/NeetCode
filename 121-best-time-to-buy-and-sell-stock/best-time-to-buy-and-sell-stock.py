@@ -1,6 +1,5 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-
         if not prices:
             return 0
         
@@ -9,14 +8,33 @@ class Solution:
         min_value = float("inf")
 
         for i in range(len(prices)):
-            if prices[i]<min_value:
+            if prices[i] < min_value:
                 min_value = prices[i]
-            if prices[i]-min_value > max_profit:
-                curr_profit = prices[i]-min_value
             
-            max_profit = max(max_profit, curr_profit)
-
+            if prices[i] - min_value > max_profit:
+                curr_profit = prices[i] - min_value
+            
+            max_profit = max(curr_profit, max_profit)
+        
         return max_profit
+
+
+        # if not prices:
+        #     return 0
+        
+        # curr_profit = 0
+        # max_profit = 0
+        # min_value = float("inf")
+
+        # for i in range(len(prices)):
+        #     if prices[i]<min_value:
+        #         min_value = prices[i]
+        #     if prices[i]-min_value > max_profit:
+        #         curr_profit = prices[i]-min_value
+            
+        #     max_profit = max(max_profit, curr_profit)
+
+        # return max_profit
         
 
 
