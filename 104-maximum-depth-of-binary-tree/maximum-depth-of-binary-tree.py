@@ -8,20 +8,26 @@
 # Using Iterative Stack Solution
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        stack = []
+        if not root:
+            return 0
         
-        if root:
-            stack.append([1,root])
+        lh = self.maxDepth(root.left)
+        rh = self.maxDepth(root.right)
+        return 1 + max(lh,rh)
+        # stack = []
+        
+        # if root:
+        #     stack.append([1,root])
 
-        depth = 0
-        while stack != []:
-            current_depth, root = stack.pop()
-            if root is not None:
-                depth = max(current_depth,depth)
-                stack.append((current_depth+1,  root.left))
-                stack.append((current_depth+1, root.right))
+        # depth = 0
+        # while stack != []:
+        #     current_depth, root = stack.pop()
+        #     if root is not None:
+        #         depth = max(current_depth,depth)
+        #         stack.append((current_depth+1,  root.left))
+        #         stack.append((current_depth+1, root.right))
 
-        return depth
+        # return depth
 
 
 
