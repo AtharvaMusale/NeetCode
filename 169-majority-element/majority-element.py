@@ -14,3 +14,7 @@ class Solution:
             if count[num] > req:
                 return num
 
+# Example usage:
+nums = [3, 2, 3]
+sol = Solution()
+print(sol.majorityElement(nums))  # Output: 3
