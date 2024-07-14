@@ -13,7 +13,18 @@ class Solution:
         
         lh = self.maxDepth(root.left)
         rh = self.maxDepth(root.right)
+
         return 1 + max(lh,rh)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # stack = []
         
         # if root:
