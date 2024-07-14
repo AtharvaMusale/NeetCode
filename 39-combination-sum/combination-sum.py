@@ -1,22 +1,97 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
-
-        def dfs(i, curr, total):
+        curr = []
+        def dfs(i,curr,total):
             if total == target:
                 res.append(curr.copy())
                 return
             
-            if i >=len(candidates) or total > target:
+            if i >= len(candidates) or total>target:
                 return
             
             curr.append(candidates[i])
             dfs(i, curr, total+candidates[i])
             curr.pop()
             dfs(i+1, curr, total)
-        
-        dfs(0,[],0)
+        dfs(0,curr,0)
         return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # res = []
+        # curr = []
+
+        # def dfs(i, curr, total):
+        #     if total ==target:
+        #         res.append(curr.copy())
+        #         return
+        #     if i>= len(candidates) or total>target:
+        #         return
+                
+        #     curr.append(candidates[i])
+        #     dfs(i, curr, total+candidates[i])
+        #     curr.pop()
+        #     dfs(i+1, curr, total)
+        # dfs(0,curr,0)
+        # return res
+
+
+
+
+
+        # res = []
+        # curr = []
+
+        # def dfs(i,curr,total):
+        #     if total == target:
+        #         res.append(curr.copy())
+        #         return
+            
+        #     if i>=len(candidates) or total>target:
+        #         return
+            
+        #     curr.append(candidates[i])
+        #     dfs(i,curr,total+candidates[i])
+        #     curr.pop()
+        #     dfs(i+1,curr,total)
+        # dfs(0,curr,0)
+
+        # return res
+
+
+
+        # res = []
+
+        # def dfs(i, curr, total):
+        #     if total == target:
+        #         res.append(curr.copy())
+        #         return
+            
+        #     if i >=len(candidates) or total > target:
+        #         return
+            
+        #     curr.append(candidates[i])
+        #     dfs(i, curr, total+candidates[i])
+        #     curr.pop()
+        #     dfs(i+1, curr, total)
+        
+        # dfs(0,[],0)
+        # return res
 
 
 
