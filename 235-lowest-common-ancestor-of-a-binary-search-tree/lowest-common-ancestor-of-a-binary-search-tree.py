@@ -18,12 +18,26 @@ class Solution:
         #     return None
         # return dfs(root)
 
+        # curr = root
+        # while curr:
+            
+        #     if p.val<curr.val and q.val<curr.val:
+        #         curr = curr.left
+
+        #     elif p.val > curr.val and q.val > curr.val:
+        #         curr = curr.right
+            
+        #     else:
+        #         return curr
+
+
         curr = root
-        while True:
-            if p.val> curr.val and q.val>curr.val:
-                curr = curr.right
-            elif p.val<curr.val and q.val<curr.val:
+        while curr:
+            if p.val<curr.val and q.val < curr.val:
                 curr = curr.left
+            
+            elif p.val>curr.val and q.val>curr.val:
+                curr = curr.right
+            
             else:
                 return curr
-        
