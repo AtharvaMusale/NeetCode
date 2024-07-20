@@ -1,5 +1,5 @@
-class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
 #         if len(grid) ==0:
 #             return 0 
 #         vis = set()
@@ -19,27 +19,27 @@ class Solution:
 #                     dfs(i,j)
 #         return island
 
-        vis = set()
-        island = 0
+        # vis = set()
+        # island = 0
 
-        def dfs(i,j):
-            for (x,y) in [(1,0),(0,1),(-1,0),(0,-1)]:
-                xi , yi = i + x, j + y
-                if (0<=xi<len(grid)) and (0<=yi<len(grid[0])) and (grid[xi][yi] == "1") and (xi,yi) not in vis:
+        # def dfs(i,j):
+        #     for (x,y) in [(1,0),(0,1),(-1,0),(0,-1)]:
+        #         xi , yi = i + x, j + y
+        #         if (0<=xi<len(grid)) and (0<=yi<len(grid[0])) and (grid[xi][yi] == "1") and (xi,yi) not in vis:
                 
-                    vis.add((xi,yi))
-                    dfs(xi,yi)
+        #             vis.add((xi,yi))
+        #             dfs(xi,yi)
 
             
         
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == "1" and (i,j) not in vis:
-                    island+=1
-                    vis.add((i,j))
-                    dfs(i,j)
+        # for i in range(len(grid)):
+        #     for j in range(len(grid[0])):
+        #         if grid[i][j] == "1" and (i,j) not in vis:
+        #             island+=1
+        #             vis.add((i,j))
+        #             dfs(i,j)
         
-        return island
+        # return island
 
 
 # class Solution:
@@ -69,15 +69,6 @@ class Solution:
 
 
 
-
-
-
-
-
-
-
-
-
         # vis = set()
         # ones=[]
         # cnt=0
@@ -101,3 +92,69 @@ class Solution:
         #             dfs(i,j)
         # return cnt
         
+
+
+
+
+
+
+
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid or not grid[0]:
+            return 0
+        ROWS, COLS = len(grid), len(grid[0])
+        visit = set()
+        
+        island = 0
+        
+        def dfs(x,y):
+
+
+            if (x<0 or y<0 or x>=ROWS or y>= COLS or grid[x][y]== "0" or (x,y) in visit):
+                return 
+
+            visit.add((x,y))
+            boundary = [[1,0],[0,1],[-1,0],[0,-1]]
+            for i,j in boundary:
+                xi = x + i
+                yj = y +j
+
+                dfs(xi,yj)
+            pass
+        
+        for i in range(ROWS):
+            for j in range(COLS):
+                if grid[i][j] == "1" and (i,j) not in visit:
+                    island+=1
+                    dfs(i,j)
+                
+        return island
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
