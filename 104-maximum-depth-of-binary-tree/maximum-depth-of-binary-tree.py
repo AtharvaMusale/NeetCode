@@ -15,13 +15,7 @@ class Solution:
         # rh = self.maxDepth(root.right)
 
         # return 1 + max(lh,rh)
-        if not root:
-            return 0
-        
-        lh = self.maxDepth(root.left)
-        rh = self.maxDepth(root.right)
-
-        return 1+ max(lh,rh)
+    
         # stack = []
         # if root is not None:
         #     stack.append((1,root))
@@ -35,7 +29,25 @@ class Solution:
         #         stack.append((curr_depth+1, root.right))
         
         # return depth
-        
+
+
+
+        stack = []
+        if root:
+       
+            stack.append((1,root))
+        depth = 0
+        curr_depth = 0
+        while stack:
+            curr_depth, root = stack.pop()
+            if root:
+                depth = max(depth, curr_depth)
+                stack.append((curr_depth+1, root.left))
+                stack.append((curr_depth+1, root.right))
+            
+        return depth
+
+
         
         
         
