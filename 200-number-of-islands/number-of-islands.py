@@ -109,15 +109,14 @@ class Solution:
         visit = set()
         
         island = 0
-        
+        boundary = [[1,0],[0,1],[-1,0],[0,-1]]
         def dfs(x,y):
-
 
             if (x<0 or y<0 or x>=ROWS or y>= COLS or grid[x][y]== "0" or (x,y) in visit):
                 return 
 
             visit.add((x,y))
-            boundary = [[1,0],[0,1],[-1,0],[0,-1]]
+            
             for i,j in boundary:
                 xi = x + i
                 yj = y +j
