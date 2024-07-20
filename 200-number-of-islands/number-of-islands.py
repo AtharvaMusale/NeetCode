@@ -106,16 +106,14 @@ class Solution:
         if not grid or not grid[0]:
             return 0
         ROWS, COLS = len(grid), len(grid[0])
-        visit = set()
-        
         island = 0
         boundary = [[1,0],[0,1],[-1,0],[0,-1]]
         def dfs(x,y):
 
-            if (x<0 or y<0 or x>=ROWS or y>= COLS or grid[x][y]== "0" or (x,y) in visit):
+            if x<0 or y<0 or x>=ROWS or y>= COLS or grid[x][y]== "0":
                 return 
 
-            visit.add((x,y))
+            grid[x][y] = "0"
             
             for i,j in boundary:
                 xi = x + i
@@ -126,7 +124,7 @@ class Solution:
         
         for i in range(ROWS):
             for j in range(COLS):
-                if grid[i][j] == "1" and (i,j) not in visit:
+                if grid[i][j] == "1":
                     island+=1
                     dfs(i,j)
                 
