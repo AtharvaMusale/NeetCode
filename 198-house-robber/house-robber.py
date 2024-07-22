@@ -12,20 +12,14 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         memo = {}
-        
         def robFrom(i):
-            # Base case: No houses left to rob
-            if i >= len(nums):
+            if i>=len(nums):
                 return 0
-            # If result is already computed, return it
+
             if i in memo:
                 return memo[i]
-            
-            # Recurrence relation: rob the current house and move to the house after the next one,
-            # or skip the current house and move to the next house
-            rob_current = nums[i] + robFrom(i + 2)
-            skip_current = robFrom(i + 1)
-            memo[i] = max(rob_current, skip_current)
+
+            memo[i] = max(nums[i] + robFrom(i+2), robFrom(i+1))    
             return memo[i]
         
         return robFrom(0)
