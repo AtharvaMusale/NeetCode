@@ -19,8 +19,7 @@ class Solution:
         for i in s:
             if i == "(":
                 count += 1
-                
+                max_depth = max(max_depth, count)
             elif i == ")":
                 count -= 1
-            max_depth = max(max_depth, count)        
         return max_depth
