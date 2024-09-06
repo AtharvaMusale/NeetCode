@@ -1,38 +1,10 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        hashset = {}
-        for i in range(len(nums)):
-            if target-nums[i] in hashset:
-                return [i,hashset[target-nums[i]]]
-            else:
-                hashset[nums[i]] = i
-            
-
+        hashmap = {}
+        for ind, val in enumerate(nums):
+            if val in hashmap:
+                return [ind , hashmap[val]]
+            hashmap[target-val] = ind
+        return []
         
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # hashmap = {}
-        # for i,j in enumerate(nums):
-        #     if target-j in hashmap:
-        #         return [i,hashmap[target-j]]
-        #     else:
-        #         hashmap[j] = i
-            
             
