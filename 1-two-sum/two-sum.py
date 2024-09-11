@@ -4,9 +4,7 @@ class Solution:
         # hasmap[Value] = index
         for i,j in enumerate(nums):
             diff = target - j
-            if j in hashmap:
-                return [hashmap[j], i]
-            else:
-                hashmap[diff] = i 
-
+            if diff in hashmap:
+                return [hashmap[diff], i]
+            hashmap[j] = i
         
