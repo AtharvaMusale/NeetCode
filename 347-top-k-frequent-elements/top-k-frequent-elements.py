@@ -9,5 +9,26 @@ class Solution:
         result = []
         for i in range(k):
             result.append(heapq.heappop(heap)[1])
-        
         return result
+
+
+
+
+
+
+
+
+
+
+
+
+        # count = Counter(nums)
+        # heap = []
+        # for num, freq in count.items():
+        #     heapq.heappush(heap, (-freq, num))
+        
+        # result = []
+        # for i in range(k):
+        #     result.append(heapq.heappop(heap)[1])
+        
+        # return result
