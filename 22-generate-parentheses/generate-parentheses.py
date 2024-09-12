@@ -1,54 +1,16 @@
 class Solution:
-    def __init__(self):
-        self.result = []
-
     def generateParenthesis(self, n: int) -> List[str]:
-        self.solve(1,0,"(",n)
-        return self.result
+        def dfs(l,r,s):
+            if len(s) == 2 * n:
+                res.append(s)
+                return
 
-    def solve(self,open,close,curr,n):
-        if open == n and open == close:
-            self.result.append(curr)
-            return 
-        if open<n:
-            self.solve(open+1, close, curr+"(",n)
+            if l<n:
+                dfs(l+1, r, s+"(")
 
-        if close < open:
-            self.solve(open, close+1, curr+")", n)
+            if r<l:
+                dfs(l, r+1, s + ")")
 
-
-
-
-
-
-
-    # def __init__(self):
-    #     self.result = []
-    # def generateParenthesis(self, n: int) -> List[str]:
-    #     self.solve(1, 0, "(", n)
-    #     return self.result
-
-    # def solve(self, open, close, curr, n):
-    #     if open == n and open == close:
-    #         self.result.append(curr)
-    #         return
-
-    #     if open < n:
-            
-    #         self.solve(open+1, close, curr+"(", n)
-          
-    #     if close < open:
-          
-    #         self.solve(open, close+1, curr+")", n)
-            
-        
-        
-
-
-        
-        
-
-# if stack empty : push ( curr (
-# else:
-#     Case 1: For each (, pop -> append )
-#     Case 2: if frontRem > 0: push ( curRes (
+        res = []
+        dfs(0,0,"")
+        return res    
