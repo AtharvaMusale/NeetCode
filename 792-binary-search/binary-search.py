@@ -4,14 +4,15 @@ class Solution:
 
         while l<=r:
             mid = (l+r)//2  
-            if nums[mid]>target:
+            
+            if nums[mid] == target:
+                return mid
+            
+            elif nums[mid]>target:
                 r = mid - 1
 
             elif nums[mid]<target:
                 l = mid + 1
-            
-            elif nums[mid] == target:
-                return mid
-            
+
         return -1
 
