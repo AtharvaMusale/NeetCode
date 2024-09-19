@@ -2,66 +2,22 @@ class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
         candidates.sort()
-        subset = []
-        def dfs(subset,pos,target):
-            if target == 0:
-                res.append(subset.copy())
-            
-            if target <= 0:
+
+        def dfs(i, cur, total):
+            if total == target:
+                res.append(cur.copy())
                 return
             
-            prev = -1
-            for i in range(pos,len(candidates)):
-                if candidates[i] == prev:
-                    continue
-                subset.append(candidates[i])
-                dfs(subset,i+1,target-candidates[i])
-                subset.pop()
-                prev = candidates[i]
-        dfs([],0,target)
+            if total>target or i == len(candidates):
+                return 
+
+            cur.append(candidates[i])
+            dfs(i+1, cur, total+ candidates[i])
+            cur.pop()
+            while i+1<len(candidates) and candidates[i] == candidates[i+1]:
+                i+=1
+            dfs(i+1, cur, total)
+        dfs(0,[],0)
+
         return res
-
-
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        # [10,1,2,7,6,1,5] -> [1,1,2,5,6,7,10]
-        #
-        #
-        #
-        #
-        # candidates.sort()
-        # res = []
-
-
-        # def backtrack(subset,pos,target):
-        #     if target == 0:
-        #         res.append(subset.copy())
-        #     if target <=0:
-        #         return
-            
-        #     prev = -1
-        #     for i in range(pos,len(candidates)):
-        #         if candidates[i] == prev:
-        #             continue
-        #         subset.append(candidates[i])
-        #         backtrack(subset,i+1,target-candidates[i])
-        #         subset.pop()
-        #         prev = candidates[i]
-
-        # backtrack([],0,target)
-        # return res
-
-            
-
