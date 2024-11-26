@@ -1,33 +1,29 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
-        s = s.strip()
-
-        if not s:
-            return 0
-
-        result = 0
-        sign = 1
-        start = 0
-
-        if s[0] == "-":
-            sign = -1
-            start = 1
-        elif s[0] == "+":
-            start = 1
-        
-        for char in s[start:]:
-            if char.isdigit():
-                result = 10 * result + int(char)
-            else:
-                break
-        
-        result *= sign
         INT_MAX = 2**31 - 1
         INT_MIN = -2**31
+        result = 0
+        index = 0
+        n = len(s)
+        sign = 1
 
-        if result > INT_MAX:
-            return INT_MAX
-        elif result < INT_MIN:
-            return INT_MIN
+        # Discard leading whitespaces
+        while index < n and s[index] == ' ':
+            index += 1
 
-        return result
+        # Check if the next character is a sign
+        if index < n and (s[index] == '+' or s[index] == '-'):
+            sign = 1 if s[index] == '+' else -1
+            index += 1
+
+        # Convert number and avoid overflow
+        while index < n and s[index].isdigit():
+            digit = int(s[index])
+            # Check overflow and underflow conditions
+            if (result > INT_MAX // 10) or (result == INT_MAX // 10 and digit > INT_MAX % 10):
+                return INT_MAX if sign == 1 else INT_MIN
+            
+            result = 10 * result + digit
+            index += 1
+
+        return sign * result
