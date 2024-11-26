@@ -3,9 +3,9 @@ class Solution:
         hashmap = {}
 
         for i,j in enumerate(nums):
-            diff = target - j
-            if diff in hashmap:
-                return [i,hashmap[diff]]
+            
+            if (target - j) in hashmap:
+                return [i,hashmap[target - j]]
             
             hashmap[j] = i
         
