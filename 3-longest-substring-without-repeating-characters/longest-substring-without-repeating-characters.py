@@ -2,7 +2,6 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         hashmap = {}
         start = 0
-        end = 0
         max_len = 0
 
         for end, val in enumerate(s):
@@ -13,4 +12,4 @@ class Solution:
             max_len = max(max_len, end-start+1)
         
         return max_len
-        
+
