@@ -1,90 +1,42 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        countT , window = {}, {}
-        have = 0
-
-        if t == "":
-            return ""
-
-        for i in t:
-            countT[i] = 1 + countT.get(i,0)
-
-        need = len(countT)
-        res, resLen = [-1,-1], float("inf")
-        l = 0
-        for r in range(len(s)):
-            c = s[r]
-            window[c] = 1 + window.get(c,0)
         
-            if c in countT and window[c] == countT[c]:
-                have+=1
+# def min_window(s, t):
+        from collections import Counter
+        
+        if not s or not t:
+            return ""
+        
+        dict_t = Counter(t)
+        required = len(dict_t)
+        
+        l, r = 0, 0
+        formed = 0
+        window_counts = {}
+        
+        ans = float("inf"), None, None  # window length, left, right
+        
+        while r < len(s):
+            character = s[r]
+            window_counts[character] = window_counts.get(character, 0) + 1
             
-            while have == need:
-                # Update the result
-                if (r-l+1) < resLen:
-                    res = [l,r]
-                    resLen = (r-l+1)
+            if character in dict_t and window_counts[character] == dict_t[character]:
+                formed += 1
+            
+            # Try and contract the window till the point it ceases to be 'desirable'.
+            while l <= r and formed == required:
+                character = s[l]
                 
-                # Pop from the left of the window
-                window[s[l]] -= 1
-                if s[l] in countT and window[s[l]] < countT[s[l]]:
-                    have-=1
+                # Save the smallest window until now.
+                if r - l + 1 < ans[0]:
+                    ans = (r - l + 1, l, r)
+                
+                window_counts[character] -= 1
+                if character in dict_t and window_counts[character] < dict_t[character]:
+                    formed -= 1
+                
+                l += 1    
+            
+            r += 1
 
-                l+=1
-        l,r = res
-        return s[l:r+1] if resLen!= float("inf") else ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # if t == "": return ""
-        # countT = Counter(t)
-        # window = defaultdict(int)
-        # have, need = 0, len(countT)
-        # ans, minLen = "", float('inf')
-        # i, j = 0, 0
-        # while j < len(s):
-        #     currChar = s[j]
-        #     window[s[j]]+=1
-        #     if window[s[j]] == countT[s[j]]:
-        #         have+=1
-        #     while have == need:
-        #         if minLen > j-i+1:
-        #             minLen = j-i+1
-        #             ans = s[i:j+1]
-        #         window[s[i]] -= 1
-        #         if s[i] in countT and window[s[i]] < countT[s[i]]:
-        #             have-=1
-        #         i+=1
-        #     j+=1
-        # return ans
-
-
+        return "" if ans[0] == float("inf") else s[ans[1]:ans[2] + 1]
