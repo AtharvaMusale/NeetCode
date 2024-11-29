@@ -5,61 +5,32 @@
 #         self.next = next
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        start = ListNode(None, head)
-        dummy = start
-
-        def getKthNode(node,k):
-            while k>0:
-                node = node.next
-                if node is None:
-                    return
-                k-=1
-            return node
-        
+        dummy = ListNode(0,head)
+        groupPrev = dummy
+    
         while True:
-            kNode =  getKthNode(dummy,k)
-            if not kNode:
+            kth = self.getKth(groupPrev, k)
+            if not kth:
                 break
             
-            kNodeNext = kNode.next
+            
+            groupNext = kth.next
 
-            prev, curr = kNode.next, dummy.next
-
-            while curr!=kNodeNext:
+            prev, curr = kth.next, groupPrev.next
+            while curr != groupNext:
                 tmp = curr.next
                 curr.next = prev
                 prev = curr
                 curr = tmp
+            
+            tmp = groupPrev.next
+            groupPrev.next = kth
+            groupPrev = tmp
+        return dummy.next
 
-            tmp2 = dummy.next
-            dummy.next = kNode
-            dummy = tmp2
-        return start.next
-             
-        # start = ListNode(None, head)
-        # groupPrev = start
-        # def getKthNode(node, k):
-        #     while  k > 0:
-        #         node = node.next
-        #         if node is None:
-        #             return
-        #         k-=1
-        #     return node
-        # while True:
-        #     kNode = getKthNode(groupPrev, k)
-        #     if not kNode: break
-        #     groupNext = kNode.next
-             
-        #     #for reversing order
-        #     prev, curr = kNode.next, groupPrev.next
-
-        #     while curr != groupNext:
-        #         temp = curr.next
-        #         curr.next = prev
-        #         prev = curr
-        #         curr = temp
-        #     temp2 = groupPrev.next # group prev must point to start of next group
-        #     groupPrev.next = kNode 
-        #     groupPrev = temp2
-        # return start.next
-        
+    
+    def getKth(self, curr, k):
+        while curr and k > 0:
+            curr = curr.next
+            k-=1
+        return curr
