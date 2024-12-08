@@ -3,16 +3,15 @@ class Solution:
         stack = []
         maxArea = 0
         
-        #stack = (index, height)
-        for i,h in enumerate(heights):
-            start = i
-            while stack and stack[-1][1]>h:
-                index, height = stack.pop()
-                maxArea = max(maxArea, height * (i - index))
-                start = index
-            
+        for ind, h in enumerate(heights):
+            start = ind
+            while stack and stack[-1][1] > h:
+                stackInd, stackHeight = stack.pop()
+                maxArea = max(maxArea, stackHeight * (ind - stackInd))
+                start = stackInd
             stack.append((start,h))
         
-        for i,h in stack:
-            maxArea = max(maxArea, h * (len(heights)- i))
+        for i, h in stack:
+            maxArea = max(maxArea, h * (len(heights)-i))
+
         return maxArea
