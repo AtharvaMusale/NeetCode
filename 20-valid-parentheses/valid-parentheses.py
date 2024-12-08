@@ -1,30 +1,15 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # hashmap = {")":"(", "}":"{","]":"["}
-        # stack = []
-
-        # for i in s:
-        #     if i not in hashmap:
-        #         stack.append(i)
-        #         continue
-            
-        #     if not stack or stack[-1] != hashmap[i]:
-        #         return False
-            
-        #     stack.pop()
-            
-        # return not stack
-
-        hashmap = {")":"(", "}":"{", "]" : "["}
+        hashmap = {")":"(", "]":"[","}":"{"}
         stack = []
-
-        for i in s:
-            if i not in hashmap:
-                stack.append(i)
-                continue
-            
-            if not stack or stack[-1]!=hashmap[i]:
-                return False
-            
-            stack.pop()
+        if s  == "":
+            return True
+        for char in s:
+            if char in hashmap:
+                top_element = stack.pop() if stack else "#"
+                if hashmap[char] != top_element:
+                    return False
+            else:
+                stack.append(char)
         return not stack
+
