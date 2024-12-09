@@ -6,16 +6,14 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def check(node, min_val, max_val):
+        def is_valid(node, min_val, max_val):
+            # An empty tree is a valid BST
             if not node:
-                return True  # Correct base case: An empty node is a valid BST
-
+                return True
+            # Check if the current node value is within the valid range
             if not (min_val < node.val < max_val):
                 return False
-            
-            # Recursively validate the subtrees with updated constraints
-            left_is_valid = check(node.left, min_val, node.val)
-            right_is_valid = check(node.right, node.val, max_val)
-            return left_is_valid and right_is_valid
+            # Recursively validate the left and right subtrees
+            return is_valid(node.left, min_val, node.val) and is_valid(node.right, node.val, max_val)
         
-        return check(root, float('-inf'), float('inf'))
+        return is_valid(root, float('-inf'), float('inf'))
