@@ -4,10 +4,10 @@ class Solution:
         visit = set()
 
         def area(r, c):
-            if r < 0 or r >= ROWS or c < 0 or c >= COLS or (r, c) in visit or grid[r][c] == 0:
+            if r < 0 or r >= ROWS or c < 0 or c >= COLS or grid[r][c] == 0:
                 return 0
 
-            visit.add((r, c))
+            grid[r][c] = 0
             return (1 +
                     area(r + 1, c) +
                     area(r - 1, c) +
@@ -17,7 +17,7 @@ class Solution:
         max_area = 0
         for r in range(ROWS):
             for c in range(COLS):
-                if grid[r][c] == 1 and (r, c) not in visit:
+                if grid[r][c] == 1:
                     current_area = area(r, c)
                     max_area = max(max_area, current_area)
 
