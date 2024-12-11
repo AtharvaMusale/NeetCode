@@ -15,6 +15,6 @@ class Solution:
             if a == b:
                 continue
             if a<b:
-                heapq.heappush(stones,-abs(b-a))
+                heapq.heappush(stones,a-b)
             
         return -stones[0] if stones else 0
