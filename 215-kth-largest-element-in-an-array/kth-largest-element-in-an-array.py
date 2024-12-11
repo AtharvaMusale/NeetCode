@@ -7,8 +7,7 @@ class Solution:
         nums = [-i for i in nums]
         heapq.heapify(nums)
 
+        for i in range(k - 1):  # Pop k-1 times to get to the k-th largest element
+            heapq.heappop(nums)
         
-        for i in range(k):
-            ans = heapq.heappop(nums)
-        
-        return -ans
+        return -heapq.heappop(nums)  # Return the negative of the k-th pop to revert the initial negation
