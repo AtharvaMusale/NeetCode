@@ -3,17 +3,13 @@ class Solution:
         if not intervals:
             return []
         
-        intervals.sort(key=lambda x: x[0])
-        res = []
-        current = intervals[0]
+        intervals.sort(key = lambda x: x[0])
+        res = [intervals[0]]
         
-        for i in range(1, len(intervals)):
-            if current[1] >= intervals[i][0]:  # There is an overlap
-                current = [current[0], max(current[1], intervals[i][1])]
+        for start, end in intervals:
+            if start <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], end)
+            
             else:
-                res.append(current)
-                current = intervals[i]
-        
-        res.append(current)  # Add the last interval
-        
+                res.append([start,end])
         return res
