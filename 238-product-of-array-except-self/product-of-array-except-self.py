@@ -1,11 +1,16 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        res = [1] * (len(nums))
+        l_mult = 1
+        r_mult = 1
+        n = len(nums)
+        l_arr = [0] * len(nums)
+        r_arr = [0] * len(nums)
 
-        for i in range(1, len(nums)):
-            res[i] = res[i-1] * nums[i-1]
-        postfix = 1
-        for i in range(len(nums) - 1, -1, -1):
-            res[i] *= postfix
-            postfix *= nums[i]
-        return res
+        for i in range(n):
+            j = -i-1
+            l_arr[i] = l_mult
+            r_arr[j] = r_mult
+            l_mult *= nums[i]
+            r_mult *= nums[j]
+        
+        return [l*r for l,r in zip(l_arr,r_arr)]
