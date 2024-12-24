@@ -10,25 +10,25 @@ class Solution:
             return 0
         
 
-        # lh = self.maxDepth(root.left)
-        # rh = self.maxDepth(root.right)
+        lh = self.maxDepth(root.left)
+        rh = self.maxDepth(root.right)
     
-        # return max(lh,rh) + 1
+        return max(lh,rh) + 1
 
-        q = deque([root])
-        depth = 0
-        while q:
-            n = len(q)
-            for _ in range(n):
-                node = q.popleft()
+        # q = deque([root])
+        # depth = 0
+        # while q:
+        #     n = len(q)
+        #     for _ in range(n):
+        #         node = q.popleft()
 
-                if node.left:
-                    q.append(node.left)
+        #         if node.left:
+        #             q.append(node.left)
                 
-                if node.right:
-                    q.append(node.right)
+        #         if node.right:
+        #             q.append(node.right)
             
-            depth+=1
+        #     depth+=1
 
-        return depth
+        # return depth
             
