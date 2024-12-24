@@ -9,19 +9,8 @@ class Solution:
         if not root:
             return 0
         
-        q = deque([root])
-        depth = 0
-    
-        while q:
-            level_length = len(q)
-            for i in range(level_length):
-                node = q.popleft()
 
-                if node.left:
-                    q.append(node.left)
-                
-                if node.right:
-                    q.append(node.right)
-            
-            depth +=1
-        return depth
+        lh = self.maxDepth(root.left)
+        rh = self.maxDepth(root.right)
+    
+        return max(lh,rh) + 1
