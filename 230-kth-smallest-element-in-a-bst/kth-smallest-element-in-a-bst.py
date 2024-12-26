@@ -5,7 +5,6 @@
 #         self.left = None
 #         self.right = None
 
-
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         stack = []
@@ -16,7 +15,7 @@ class Solution:
                 stack.append(curr)
                 curr = curr.left
             curr = stack.pop()
-            k -= 1
+            k-=1
             if k == 0:
                 return curr.val
             curr = curr.right
