@@ -1,16 +1,21 @@
-from collections import Counter
-import heapq
-
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = Counter(nums)  # Count the frequency of each element
+        # What for empty array?
+        # Can I use heap?
+
+        count = {}
+        for num in nums:
+            count[num] = 1 + count.get(num,0)
         
-        # Use a min-heap of size k
         heap = []
-        for num, freq in count.items():
-            heapq.heappush(heap, (freq, num))
-            if len(heap) > k:
-                heapq.heappop(heap)  # Remove the element with the smallest frequency
+        for n in count.keys():
+            heapq.heappush(heap, (count[n],n))
+            if len(heap)>k:
+                heapq.heappop(heap)
+            
         
-        # Extract the elements from the heap
-        return [num for freq, num in heap]
+        res = []
+        for i in range(k):
+            res.append(heapq.heappop(heap)[1])
+        return res
+
