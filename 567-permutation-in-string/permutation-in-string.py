@@ -1,31 +1,23 @@
-from collections import Counter
 class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        from collections import Counter
 
-    def checkInclusion(self, s1, s2):
-        if len(s1) > len(s2):
-            return False
+        chars1 = Counter(s1)  # Frequency map of s1
+        chars2 = Counter()    # Frequency map for the sliding window in s2
+        l = 0  # Left pointer for the sliding window
 
-        # Frequency counts of s1 and the first window in s2
-        count_s1 = Counter(s1)
-        window = Counter(s2[:len(s1)])
+        for r in range(len(s2)):
+            chars2[s2[r]] += 1
 
-        # Compare the initial window
-        if count_s1 == window:
-            return True
+            # If the window size exceeds the length of s1, shrink it from the left
+            if r - l + 1 > len(s1):
+                chars2[s2[l]] -= 1
+                if chars2[s2[l]] == 0:
+                    del chars2[s2[l]]
+                l += 1
 
-        # Sliding window across s2
-        len_s1 = len(s1)
-        for i in range(len_s1, len(s2)):
-            # Add the new character to the window
-            window[s2[i]] += 1
-            # Remove the old character from the window
-            window[s2[i - len_s1]] -= 1
-            # Remove the character count from the dictionary if it drops to zero
-            if window[s2[i - len_s1]] == 0:
-                del window[s2[i - len_s1]]
-
-            # Compare after each adjustment
-            if count_s1 == window:
+            # Check if the current window matches the frequency of s1
+            if chars1 == chars2:
                 return True
 
         return False
