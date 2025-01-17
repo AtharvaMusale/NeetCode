@@ -1,41 +1,22 @@
-
-# class Solution:
-#     def feasible(self, piles, h, k):
-#         hours = 0
-#         for p in piles:
-#             hours += math.ceil(p/k)
-#             return hours <= h
-
-
-#     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-#         low, high = 1, len(piles)
-#         ans = -1
-#         while low<=high:
-#             mid = (low+high)//2
-#             if self.feasible(piles, h, mid):
-#                 ans = mid
-#                 high = mid-1
-#             else:
-#                 low = mid + 1
-#         return ans
-
 class Solution:
-    def feasible(self, piles, h, k):
-        hours = 0
-        for p in piles:
-            hours += math.ceil(p / k)
-        return hours <= h
-
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        low, high = 1, max(piles)
-        ans = -1
-        while low<=high:
-            mid = (low+high)//2
-            if self.feasible(piles, h, mid):
-                ans = mid
-                high = mid-1
-            else:
-                low = mid + 1
+        # [3,6,7,11] [1, 2, 2, 3]
+        # HOURS = INT(PILE[I]/K) <= h if greater then increase k
+        
+        l, r = 1 ,  max(piles)
+        res = r
 
-        return ans
-                
+        while l<=r:
+            k = l + (r-l)//2
+            
+            total = 0
+            for p in piles:
+                total += math.ceil(float(p)/k)
+
+            if total > h:
+                l = k + 1
+            else:
+                res = k
+                r = k - 1
+
+        return res            
