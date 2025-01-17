@@ -11,7 +11,7 @@ class Solution:
             
             total = 0
             for p in piles:
-                total += math.ceil(float(p)/k)
+                total += math.ceil(int(p)/k)
 
             if total > h:
                 l = k + 1
