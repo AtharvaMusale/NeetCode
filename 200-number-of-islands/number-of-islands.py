@@ -1,53 +1,68 @@
-class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        # horiz, vertically, edges surounded by water -  assume
-
-        ROWS, COLS = len(grid), len(grid[0])
-        # direct = [[-1,0],[1,0],[0,1],[0,-1]]
-        island = 0
-        # visit = set()
-        def dfs(r,c):
-            if r<0 or r >=ROWS or c<0 or c>=COLS or grid[r][c] == "0":
-                return 
-
-            grid[r][c] = "0"
-            dfs(r+1,c)
-            dfs(r-1,c)
-            dfs(r,c+1)
-            dfs(r,c-1)
-
-
-        for r in range(ROWS):
-            for c in range(COLS):
-                if grid[r][c] == "1":
-                    dfs(r,c)
-                    island+=1
-        
-        return island
-
-
 # class Solution:
 #     def numIslands(self, grid: List[List[str]]) -> int:
 #         ROWS, COLS = len(grid), len(grid[0])
+#         island = 0
+#         directions = [[-1,0],[1,0],[0,1],[0,-1]]
 #         visit = set()
 
-#         def dfs(r, c):
-#             # Boundary check and check if it is water or already visited
-#             if r < 0 or r >= ROWS or c < 0 or c >= COLS or (r, c) in visit or grid[r][c] == "0":
-#                 return
+#         if not grid or not grid[0]:  # Checks for an empty grid or empty rows.
+#             return 0
 
-#             visit.add((r, c))
-#             # Recursively call dfs in all four directions
-#             dfs(r + 1, c)
-#             dfs(r - 1, c)
-#             dfs(r, c + 1)
-#             dfs(r, c - 1)
+#         def bfs(r,c):
+#             q = deque()
+#             visit.add((r,c))
+#             q.append((r,c))
 
-#         island = 0
+#             while q:
+#                 row, col = q.popleft()
+#                 for dr,dc in directions:
+#                     nr, nc = row + dr, col + dc
+#                     if nr<0 or nr >= ROWS or nc<0 or nc>=COLS or (nr,nc) in visit or grid[nr][nc] == "0":
+#                         continue 
+#                     q.append((nr,nc))
+#                     visit.add((nr,nc))
+
+
 #         for r in range(ROWS):
 #             for c in range(COLS):
-#                 if grid[r][c] == "1" and (r, c) not in visit:
-#                     dfs(r, c)
-#                     island += 1
-
+#                 if grid[r][c] == "1":
+#                     bfs(r,c)
+#                     island+=1
+                
 #         return island
+
+
+
+from collections import deque
+from typing import List
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid or not grid[0]:  # Correctly checks for an empty grid or empty rows.
+            return 0
+        
+        ROWS, COLS = len(grid), len(grid[0])
+        island = 0
+        directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+        visit = set()
+
+        def bfs(r, c):
+            q = deque()
+            q.append((r, c))
+            visit.add((r, c))
+
+            while q:
+                row, col = q.popleft()
+                for dr, dc in directions:
+                    nr, nc = row + dr, col + dc
+                    if 0 <= nr < ROWS and 0 <= nc < COLS and (nr, nc) not in visit and grid[nr][nc] == "1":
+                        q.append((nr, nc))
+                        visit.add((nr, nc))
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == "1" and (r, c) not in visit:
+                    bfs(r, c)
+                    island += 1
+                
+        return island
