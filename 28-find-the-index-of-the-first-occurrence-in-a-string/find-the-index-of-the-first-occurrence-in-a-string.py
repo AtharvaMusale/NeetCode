@@ -3,13 +3,14 @@ class Solution:
         if not needle:
             return 0
         
-        n = len(haystack)
-        m = len(needle)
-
-        if m>n:
+        if not haystack:
             return -1
-
-        for i in range(n-m+1):
-            if haystack[i:i+m] == needle:
+        
+        for i in range(len(haystack)-len(needle)+1):
+            j = 0
+            while j<len(needle) and haystack[i+j] == needle[j]:
+                j+=1
+            if j == len(needle):
                 return i
+            
         return -1
