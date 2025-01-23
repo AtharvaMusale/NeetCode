@@ -1,37 +1,33 @@
+############################################################################################
+# Follow-Up Solution
+#   Runtime: O(MN)
+#       Every cell is touched about once.
+#   Space: O(N)
+#       We need to store a deque of length equal to the number of columns.
+# Runtime: 72 ms, faster than 99.85% of Python3 online submissions for Toeplitz Matrix.
+# Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Toeplitz Matrix.
+############################################################################################
+from collections import deque
 class Solution:
-#     def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-#         ROWS, COLS = len(matrix), len(matrix[0])
-
-#         for r in range(ROWS-1):
-#             for c in range(COLS-1):
-#                 if matrix[r][c] != matrix[r+1][c+1]:
-#                     return False
-                
-#         return True
-
     def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-        rows = len(matrix)
-        columns = len(matrix[0])
+        # Validate Input
+        if not matrix or not matrix[0]:
+            return False                
         
-        # Function to check if all elements in a diagonal starting from (start_row, start_col) are the same
-        def checkDiagonal(start_row, start_col):
-            val = matrix[start_row][start_col]
-            i, j = start_row, start_col
-            while i < rows and j < columns:
-                if matrix[i][j] != val:
+        # Create a deque tracking the expected values for the next row
+        expected = deque(matrix[0])
+        
+        # Iterate through all the remaining rows, verifying they align with the
+        #   expected row.
+        for row_i in range(1, len(matrix)):
+            row = matrix[row_i]
+            expected.pop()
+            expected.appendleft(row[0])
+            
+			# Only check from index 1 and down as we've just added index 0 to expected
+            for col_i in range(1, len(row)):
+                if row[col_i] != expected[col_i]:
                     return False
-                i += 1
-                j += 1
-            return True
         
-        # Check all diagonals starting from the first column
-        for row in range(rows):
-            if not checkDiagonal(row, 0):
-                return False
-        
-        # Check all diagonals starting from the first row (excluding the first element, already checked)
-        for col in range(1, columns):
-            if not checkDiagonal(0, col):
-                return False
-
+        # If we've reached here, all diagonals aligned
         return True
