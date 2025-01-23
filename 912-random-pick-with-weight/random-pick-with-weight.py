@@ -1,60 +1,28 @@
-import random
 class Solution:
-    def __init__(self,w):
-        self.w = w
+
+    def __init__(self, w: List[int]):
         self.prefix_sum = []
-        self.sum = 0
-        for i in w:
-            self.sum += i
-            self.prefix_sum.append(self.sum)
-    
-    def pickIndex(self):
-        target = self.sum * random.random()
-        return self.search(target)
-    
 
-    def search(self, num):
-        low, high, ans = 0, len(self.prefix_sum) - 1, None
+        curr_sum = 0
+        for i in range(len(w)):
+            curr_sum += w[i]
+            self.prefix_sum.append(curr_sum)
 
-        while low <= high:
-            mid = low + (high - low) // 2
-            if num < self.prefix_sum[mid]:
-                ans = mid
-                high = mid - 1
+        self.total_sum = curr_sum
+        
+    def pickIndex(self) -> int:
+        target = random.randint(1, (self.total_sum))
+
+        l, r = 0, len(self.prefix_sum)-1
+
+        while l<r:
+            m = (l+r)//2
+            if self.prefix_sum[m] >= target:
+                r = m
             else:
-                low = mid + 1
-
-        return ans
-
-# class Solution:
-#     def __init__(self, w):
-#         self.prefix_sum = []
-#         self.w = w
-#         self.sum = 0
-#         for wt in w:
-#             self.sum += wt
-#             self.prefix_sum.append(self.sum)
-
-#     def pickIndex(self):
-#         target = self.sum * random.random()
-#         print(target)
-#         return self.search(target)
-
-#     def search(self, num):
-#         low, high, ans = 0, len(self.prefix_sum) - 1, None
-
-#         while low <= high:
-#             mid = low + (high - low) // 2
-#             if num < self.prefix_sum[mid]:
-#                 ans = mid
-#                 high = mid - 1
-#             else:
-#                 low = mid + 1
-
-#         return ans
-
-# Example usage:
-# w = [3, 17, 18, 25]
+                l = m +1
+        
+        return l
+# Your Solution object will be instantiated and called as such:
 # obj = Solution(w)
-# param_1 = obj.pick_index()
-# print(param_1)
+# param_1 = obj.pickIndex()
