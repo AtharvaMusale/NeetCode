@@ -1,1 +1,1 @@
-<h2>k-closest-points-to-origin Notes</h2><hr>[ Time taken: 5 m 41 s ]
+<h2>k-closest-points-to-origin Notes</h2><hr>[ Time taken: 5 m 39 s ]
