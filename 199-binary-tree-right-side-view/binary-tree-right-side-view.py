@@ -8,9 +8,9 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
             return []
-        
-        res = []
         q = deque([root])
+        res = []
+
 
         while q:
             n = len(q)
@@ -18,12 +18,10 @@ class Solution:
                 node = q.popleft()
                 if i == n-1:
                     res.append(node.val)
-
+                
                 if node.left:
                     q.append(node.left)
-                
                 if node.right:
                     q.append(node.right)
                 
         return res
-
