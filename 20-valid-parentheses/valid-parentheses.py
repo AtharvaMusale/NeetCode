@@ -11,4 +11,4 @@ class Solution:
                     return False
             else:
                 stack.append(char)
-        return len(stack)== 0 
+        return not stack
