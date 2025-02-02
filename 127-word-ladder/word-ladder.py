@@ -3,7 +3,7 @@ class Solution:
         if endWord not in wordList:
             return 0
         
-        nei = collections.defaultdict(list)
+        nei = defaultdict(list)
         wordList.append(beginWord)
         for word in wordList:
             for j in range(len(word)):
@@ -11,9 +11,8 @@ class Solution:
                 nei[pattern].append(word)
         
         q = deque([beginWord])
-        res = 1
         visit = set()
-
+        res = 1
         while q:
             for i in range(len(q)):
                 word = q.popleft()
@@ -22,9 +21,9 @@ class Solution:
                 
                 for j in range(len(word)):
                     pattern = word[:j] + "*" + word[j+1:]
-                    for neigh in nei[pattern]:
-                        if neigh not in visit:
-                            visit.add(neigh)
-                            q.append(neigh)
-            res+=1
+                    for neiWord in nei[pattern]:
+                        if neiWord not in visit:
+                            visit.add(neiWord)
+                            q.append(neiWord)
+            res += 1
         return 0
