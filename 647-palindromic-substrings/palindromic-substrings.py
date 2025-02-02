@@ -1,19 +1,17 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-# def countSubstrings(s):
-        def expandAroundCenter(left, right):
+        def expandCentre(l,r):
             count = 0
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                count += 1
-                left -= 1
-                right += 1
+            while l>=0 and r<len(s) and s[l] == s[r]:
+                count+=1
+                l-=1
+                r+=1
             return count
 
-        total_palindromes = 0
-        for i in range(len(s)):
-            # Count odd-length palindromes
-            total_palindromes += expandAroundCenter(i, i)
-            # Count even-length palindromes
-            total_palindromes += expandAroundCenter(i, i + 1)
+        
 
-        return total_palindromes
+        total = 0
+        for i in range(len(s)):
+            total += expandCentre(i,i)
+            total+= expandCentre(i,i+1)
+        return total
