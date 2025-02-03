@@ -1,27 +1,23 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        # Could be backtracking
-        # Only n given
-        # n= 1 :()
-        # n = 3: openN closedN
-        stack = []
         res = []
+        curr = []
 
-        def backtrack(open_count, close_count):
+        def backtrack(openC,closeC):
+            if openC == closeC == n:
+                res.append("".join(curr))
+                return 
             
-            if open_count == close_count == n:
-                res.append("".join(stack))
-                return
+            if openC<n:
+                curr.append("(")
+                backtrack(openC+1, closeC)
+                curr.pop()
+            
+            if closeC < openC:
+                curr.append(")")
+                backtrack(openC, closeC+1)
+                curr.pop()
 
-            if open_count < n:
-                stack.append("(")
-                backtrack(open_count + 1, close_count)
-                stack.pop()
-
-            if close_count < open_count:
-                stack.append(")")
-                backtrack(open_count, close_count + 1)
-                stack.pop()
-        
-        backtrack(0, 0)
+        backtrack(0,0)
         return res
+            
