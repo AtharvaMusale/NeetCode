@@ -1,16 +1,14 @@
+from typing import List
+
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
         
-        global_sum = float("-inf")
-        l= 0
-        curr_sum = 0
+        # Initialize curr_sum with first k elements
+        curr_sum = sum(nums[:k])
+        global_sum = curr_sum  # First k elements sum is our initial max sum
 
-        for r in range(len(nums)):
-            curr_sum += nums[r]
-            if r-l+1 == k:
-                global_sum = max(global_sum, curr_sum)
-                curr_sum -= nums[l]
-                l+=1
-            
-        return global_sum / k
-            
+        for r in range(k, len(nums)):  # Start from k since first window is precomputed
+            curr_sum += nums[r] - nums[r - k]  # Sliding window update
+            global_sum = max(global_sum, curr_sum)  # Track maximum sum
+
+        return global_sum / k  # Compute average
