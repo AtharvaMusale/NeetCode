@@ -1,27 +1,24 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        # "lee(t(c)o)de)"
-        # Add indices of ( in stack and anytime ) is encountered remove it
-        # Whatever is remianing that can be ignore and join rest of the string
         stack = []
-        indRemove = set()
-        ans = ""
-        for ind,val in enumerate(s):
-            if val == "(":
-                stack.append(ind)
-
-            elif val == ")":
+        invalid_indices = set()
+        for i,c in enumerate(s):
+            if c == "(":
+                stack.append(i)
+        
+            elif c == ")":
                 if stack:
                     stack.pop()
                 else:
-                    indRemove.add(ind)            
-        indRemove.update(stack)
+                    invalid_indices.add(i)
+            
 
-        for ind, val in enumerate(s):
-            if ind not in indRemove:
-                # continue
-                ans += val
-        return ans
-            
-            
+        while stack:
+            invalid_indices.add(stack.pop())
         
+        res = ""
+        for i,c in enumerate(s):
+            if i not in invalid_indices:
+                res+= c
+        
+        return res
