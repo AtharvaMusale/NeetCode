@@ -1,11 +1,9 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        #  Convert to lowercase
-        # l = r  while l<=r and each char is alphanumeric then compare and adjust   
-        l = 0
-        r = len(s)-1
         s = s.lower()
-        while l< r:
+        l, r = 0,len(s)-1
+
+        while l<=r:
             while l<=r and not s[l].isalnum():
                 l+=1
             while l<=r and not s[r].isalnum():
@@ -13,8 +11,7 @@ class Solution:
             
             if l<r and s[l]!=s[r]:
                 return False
-
-            l+=1
+            l+=1 
             r-=1
 
         return True
