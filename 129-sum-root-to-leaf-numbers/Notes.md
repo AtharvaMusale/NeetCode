@@ -1,1 +1,1 @@
-<h2>sum-root-to-leaf-numbers Notes</h2><hr>[ Time taken: 5 m 17 s ]
+<h2>sum-root-to-leaf-numbers Notes</h2><hr>[ Time taken: 4 m 45 s ]
