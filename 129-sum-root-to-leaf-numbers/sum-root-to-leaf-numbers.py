@@ -10,7 +10,7 @@ class Solution:
         def dfs(node,add):
             nonlocal total
             if not node:
-                return
+                return 
             
             add = add * 10 + node.val
 
@@ -20,6 +20,6 @@ class Solution:
             else:
                 dfs(node.left, add)
                 dfs(node.right, add)
-            
+        
         dfs(root,0)
         return total
