@@ -12,19 +12,18 @@ class Solution:
         oldToNew = {}
         if not head:
             return None
-
         curr = head
         while curr:
             copy = Node(curr.val)
             oldToNew[curr] = copy
             curr = curr.next
-
+        
         curr = head
         while curr:
             if curr.next:
-                oldToNew[curr].next =  oldToNew[curr.next]
+                oldToNew[curr].next = oldToNew[curr.next]
             if curr.random:
-                oldToNew[curr].random =  oldToNew[curr.random]
+                oldToNew[curr].random = oldToNew[curr.random]
             curr = curr.next
-    
-        return oldToNew[head]
+
+        return oldToNew[head]      
