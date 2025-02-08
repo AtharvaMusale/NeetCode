@@ -3,8 +3,11 @@ class Solution:
         # Can string be empty?
         #  If no common prefix? : return empty string
 
-        for i in range(len(strs[0])):
-            for s in strs:
-                if i == len(s) or s[i] != strs[0][i]:
-                    return s[:i]
-        return strs[0]
+        prefix = strs[0]
+
+        for s in strs[1:]:
+            while not s.startswith(prefix):
+                prefix = prefix[:-1]
+                if not prefix:
+                    return ""
+        return prefix
