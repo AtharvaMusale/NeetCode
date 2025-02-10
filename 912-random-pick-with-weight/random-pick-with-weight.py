@@ -1,28 +1,28 @@
+import random
+
 class Solution:
+    def __init__(self, w):
+        self.cum_sum = []
+        current_sum = 0
+        for weight in w:
+            current_sum += weight
+            self.cum_sum.append(current_sum)
 
-    def __init__(self, w: List[int]):
-        self.prefix_sum = []
-
-        total = 0
-        for i in w:
-            total+=i
-            self.prefix_sum.append(total)
-        self.total = total
-
-
-    def pickIndex(self) -> int:
-        l, r = 0, len(self.prefix_sum) -1
-        target = random.randint(1, self.total)
-
-        while l<r:
-            m = (l + r)//2
-            if self.prefix_sum[m]<target:
-                l = m + 1
+    def pickIndex(self):
+        # Generate a random number between 1 and the total sum of weights
+        u = random.randint(1, self.cum_sum[-1])
+        
+        # Binary search for the smallest index j where cum_sum[j] >= u
+        l, r = 0, len(self.cum_sum) - 1
+        while l <= r:
+            m = (l + r) // 2
+            if self.cum_sum[m] >= u:
+                r = m - 1
             else:
-                r = m
+                l = m + 1
         return l
 
-
-# Your Solution object will be instantiated and called as such:
+# Example of usage
+# w = [1, 3, 2]  # Example weights
 # obj = Solution(w)
-# param_1 = obj.pickIndex()
+# print(obj.pickIndex())  # Outputs an index, where index 1 has the highest probability of being picked
