@@ -5,7 +5,7 @@ class Solution:
 
         l,r = 0, x // 2
         while l<=r:
-            m = (l+r)//2
+            m = l + ((r-l)//2)
             d = m * m
             if d > x:
                 r = m - 1
