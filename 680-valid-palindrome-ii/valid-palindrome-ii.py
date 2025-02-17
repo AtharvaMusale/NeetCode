@@ -1,17 +1,19 @@
 class Solution:
-    def valid_palindrome(self,s,l,r):
+    def validPalindrome(self, s: str) -> bool:
+        l,r  = 0, len(s)-1
         while l<r:
             if s[l]!=s[r]:
-                return False
+                return self.palin(s,l+1,r) or self.palin(s,l,r-1)
             l+=1
             r-=1
         return True
 
-    def validPalindrome(self, s: str) -> bool:
-        l, r = 0, len(s)-1
+            
+
+    def palin(self, s,l,r):
         while l<r:
             if s[l]!=s[r]:
-                return self.valid_palindrome(s,l+1,r) or self.valid_palindrome(s,l,r-1)
+                return False
             l+=1
             r-=1
         return True
