@@ -1,26 +1,21 @@
-import math
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         stack = []
-        operations = ["+","-","*","/"]
-
-        for t in tokens:
-            if t in operations:
+        operation = ["+","-","*","/"]
+        for c in tokens:
+            if c in operation:
                 if len(stack)>=2:
                     a = int(stack.pop())
                     b = int(stack.pop())
-                    if t == "+":
+                    if c == "+":
                         stack.append(a+b)
 
-                    elif t == "-":
+                    elif c == "-":
                         stack.append(b-a)
-
-                    elif t == "*":
+                    elif c == "*":
                         stack.append(a*b)
-
-                    elif t == "/":
+                    elif c== "/":
                         stack.append(int(b/a))
             else:
-                stack.append(int(t))
+                stack.append(int(c))
         return stack[0]
-                    
