@@ -3,9 +3,11 @@ class Solution:
         res = []
         nums.sort()
         for i in range(len(nums)-2):
-            l, r = i+1, len(nums)-1
+            if nums[i]>0:
+                break
             if i > 0 and nums[i] == nums[i - 1]:
                 continue  # Skip duplicate for `i`
+            l, r = i+1, len(nums)-1
             while l<r:
                 add = nums[i] + nums[l] + nums[r]
                 if add > 0:
