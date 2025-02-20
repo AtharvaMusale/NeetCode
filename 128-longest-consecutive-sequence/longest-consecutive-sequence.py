@@ -1,15 +1,26 @@
+# class Solution:
+#     def longestConsecutive(self, nums: List[int]) -> int:
+#         hashset = set(nums)
+#         longest = 0
+#         for n in nums:
+#             if n-1 in hashset:
+#                 continue
+#             length = 1
+#             while n+1 in hashset:
+#                 length+=1
+#                 n+=1
+#             longest = max(longest,length)
+#         return longest
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # [100,4,200,1,3,2]
-        # Cant sort it
         nums = set(nums)
         longest = 0
-        for num in nums:
-            if num-1 in nums:
+        for n in nums:
+            if n-1 in nums:
                 continue
             length = 1
-            while num+1 in nums:
+            while n+1 in nums:
                 length+=1
-                num+=1
-            longest = max(longest,  length)
+                n+=1
+            longest = max(longest, length)
         return longest
