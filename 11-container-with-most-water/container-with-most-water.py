@@ -6,9 +6,11 @@ class Solution:
 
         while l<r:
             area = ((r-l) * min(nums[l],nums[r]))
+            if area>max_area:
+                max_area = area
             if nums[l]<=nums[r]:
                 l+=1
             else:
                 r-=1
-            max_area = max(max_area,area)
+           
         return max_area
