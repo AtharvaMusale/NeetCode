@@ -17,5 +17,6 @@ class Solution:
                 l2 = l2.next
             
             curr = curr.next
+            
         curr.next = l1 or l2
         return dummy.next
