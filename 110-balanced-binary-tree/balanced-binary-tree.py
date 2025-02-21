@@ -7,7 +7,7 @@
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         def dfs(root):
-            if not root:
+            if root is None:
                 return [True,0]
             
             left, right = dfs(root.left), dfs(root.right)
