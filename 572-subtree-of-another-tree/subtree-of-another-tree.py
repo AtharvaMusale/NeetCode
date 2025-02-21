@@ -14,14 +14,15 @@ class Solution:
         
         if self.isSameTree(r,s):
             return True
-        
-        return self.isSubtree(r.left, s) or self.isSubtree(r.right, s)
+
+        return self.isSubtree(r.left,s) or self.isSubtree(r.right, s)
     
-    
-    def isSameTree(self, r, s):
+    def isSameTree(self,r,s):
         if not r and not s:
             return True
-        if r and s and r.val == s.val:
-            return (self.isSameTree(r.left, s.left) and 
-                   self.isSameTree(r.right, s.right))
-        return False
+        if not r or not s:
+            return False
+        if r.val != s.val:
+            return False
+        return self.isSameTree(r.left, s.left) and self.isSameTree(r.right, s.right)
+            
