@@ -1,30 +1,33 @@
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        preMap = defaultdict(list)
+    def canFinish(self, numCourses: int, prereq: List[List[int]]) -> bool:
+        hashmap = defaultdict(list)
 
-        for crs,pre in prerequisites:
-            preMap[crs].append(pre)
-        
+        for crs,pre in prereq:
+            hashmap[crs].append(pre)
+
         visit = set()
 
         def dfs(crs):
             if crs in visit:
                 return False
-            
-            if preMap[crs] == []:
+
+            if hashmap[crs] == []:
                 return True
             
             visit.add(crs)
-            for pre in preMap[crs]:
+
+            for pre in hashmap[crs]:
                 if not dfs(pre):
                     return False
-                
             
             visit.remove(crs)
-            preMap[crs] = []
+            hashmap[crs] = []
             return True
-        
-        for crs,pre in prerequisites:
+            
+         
+            
+        for crs,pre in prereq:
             if not dfs(crs):
                 return False
         return True
+        
