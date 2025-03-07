@@ -1,14 +1,12 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = {}
-        for n in nums:
-            count[n] = 1+ count.get(n,0)
+        count = Counter(nums)
+        # {1:3, 2:2, 3:1}
+        heap = []
+        for key,val in count.items():
+            heapq.heappush(heap,(val,key))
+            if len(heap)>k:
+                heapq.heappop(heap)
 
-        min_heap = []
-        for val,count in count.items():
-            heapq.heappush(min_heap, (count,val))
-            if len(min_heap)>k:
-                heapq.heappop(min_heap)
-        
-        # Extract the elements from the heap
-        return [val for cnt, val in min_heap]
+        return [val for cnt,val in heap]
+
