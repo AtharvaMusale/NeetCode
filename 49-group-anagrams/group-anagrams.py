@@ -1,10 +1,10 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        res = {}
-        for i in strs:
-            s = ''.join(sorted(i))
-            if s in res:
-                res[s].append(i)
+        hashmap = {}
+        for s in strs:
+            key = "".join(sorted(s))
+            if key in hashmap:
+                hashmap[key].append(s)
             else:
-                res[s] = [i]
-        return list(res.values())
+                hashmap[key] = [s]
+        return list(hashmap.values())
