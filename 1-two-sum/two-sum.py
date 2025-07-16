@@ -4,7 +4,6 @@ class Solution:
         for i, val in enumerate(nums):
             diff = target - val
             if diff in hashmap:
-                return [hashmap[diff],i]
-            else:
-                hashmap[val] = i
+                return [i, hashmap[diff]]
+            hashmap[val] = i
         return 
